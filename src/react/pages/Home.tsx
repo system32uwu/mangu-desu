@@ -1,6 +1,5 @@
 import * as React from "react";
 import axios from "axios";
-//import { Home as MgdxHome } from "mangadex-full-api";
 
 //listado de mangas
 
@@ -9,8 +8,6 @@ import axios from "axios";
 interface IProps {}
 
 interface IState {}
-
-//let home = new MgdxHome(true);
 
 class Home extends React.Component<IProps, IState> {
   public constructor(props: IProps) {

@@ -93,7 +93,7 @@
     "custom-electron-titlebar": "^3.2.6",
     "electron-squirrel-startup": "^1.0.0",
     "express": "^4.17.1",
-    "mangadex-full-api": "^4.4.0",
+    "mangadex-api": "^4.6.3",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0"

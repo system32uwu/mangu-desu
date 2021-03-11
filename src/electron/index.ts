@@ -1,5 +1,5 @@
 import { app, BrowserWindow } from "electron";
-const server = require('./server');
+require('./server');
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 
