@@ -87,3 +87,6 @@ typings/
 
 # Electron-Forge
 out/
+
+#sessionId and rememberMeToken
+src/electron/server/api/auth/session

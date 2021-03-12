@@ -1,5 +1,3 @@
-import * as request from 'smol-request'
-
 export interface Session {
   sessionId?: string
   sessionExpiration?: Date | string
@@ -19,10 +17,6 @@ export interface AgentOptions {
   hentai?: number
   getCredentials?: Session | (() => Promise<Session>) | (() => Session)
   loginCredentials?: Session | (() => Promise<Session>) | (() => Session)
-}
-
-export interface MRequestOptions<T = 'text'> extends request.RequestOptions<T> {
-  baseUrl?: string
 }
 
 export interface SearchQuery {
