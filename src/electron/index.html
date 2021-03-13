@@ -13,14 +13,7 @@
           backgroundColor: customTitlebar.Color.fromHex("#444"),
           menu: false,
         });
-
-        let shell = require("electron").shell;
-        document.addEventListener("click", function (event) {
-          if (event.target.href && event.target.href.startsWith("http")) {
-            event.preventDefault();
-            shell.openExternal(event.target.href);
-          }
-        });
+        
       </script>
     </header>
     <div id="root"></div>

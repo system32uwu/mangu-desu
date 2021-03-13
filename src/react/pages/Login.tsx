@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -10,6 +10,7 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import { loginWithMangaDex } from "../util";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,6 +47,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login() {
   const classes = useStyles();
+  const [username, setUsername] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [rememberMe, setrememberMe] = useState(false);
+
+  useEffect(() => {
+    console.log({ username, password, rememberMe });
+  }, [username, password, rememberMe]);
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -59,8 +67,23 @@ export default function Login() {
           <Typography component="h1" variant="h5">
             Sign in with Mangadex
           </Typography>
-          <form className={classes.form} noValidate>
+          <form
+            className={classes.form}
+            noValidate
+            onSubmit={(e) => {
+              e.preventDefault();
+              loginWithMangaDex(username, password, rememberMe).then(
+                (session) => {
+                  console.log(JSON.stringify(session));
+                  //redirect to home page.
+                }
+              );
+            }}
+          >
             <TextField
+              onChange={({ target }) => {
+                setUsername(target.value);
+              }}
               variant="outlined"
               margin="normal"
               required
@@ -73,6 +96,9 @@ export default function Login() {
               autoFocus
             />
             <TextField
+              onChange={({ target }) => {
+                setPassword(target.value);
+              }}
               variant="outlined"
               margin="normal"
               required
@@ -84,6 +110,9 @@ export default function Login() {
               autoComplete="current-password"
             />
             <FormControlLabel
+              onChange={(event) => {
+                setrememberMe(!rememberMe);
+              }}
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
@@ -98,13 +127,11 @@ export default function Login() {
             </Button>
           </form>
           <Button
-            style={{ textTransform: "none" }}
+            style={{ textTransform: "none", color:"Highlight" }}
             href="https://mangadex.org/signup"
             target="_"
           >
-            <a href="https://mangadex.org/signup" target="_">
-              Don't have an account? Sign Up
-            </a>
+            Don't have an account? Sign Up
           </Button>
         </div>
       </Grid>

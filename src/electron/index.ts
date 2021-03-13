@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, shell } from "electron";
 require("./server");
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
@@ -17,7 +17,7 @@ const createWindow = (): void => {
     webPreferences: {
       nodeIntegration: true,
       enableRemoteModule: true,
-      contextIsolation:false
+      contextIsolation: false,
     },
     titleBarStyle: "hidden",
     frame: false,
@@ -28,9 +28,13 @@ const createWindow = (): void => {
   // and load the index.html of the app.
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 
+  mainWindow.webContents.on("new-window", (event, url) => {
+    event.preventDefault();
+    shell.openExternal(url);
+  });
+
   // Open the DevTools.
   //mainWindow.webContents.openDevTools();
-
 };
 
 // This method will be called when Electron has finished
