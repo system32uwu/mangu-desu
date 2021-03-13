@@ -90,3 +90,5 @@ out/
 
 #sessionId and rememberMeToken
 src/electron/server/api/auth/session
+
+auth

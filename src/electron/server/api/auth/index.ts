@@ -10,46 +10,46 @@ interface authedResponse {
   persistentId?: string;
 }
 
-router.get(
-  "/login",
-  (req: Request, res: Response) => {
-    let username = req.query.username as string;
-    let password = req.query.password as string;
-    let rememberMe = req.query.rememberMe as string;
+router.get("/login", (req: Request, res: Response) => {
+  console.log("calling retrieve login");
 
-    const saveSession = rememberMe === "true" ? true : false;
+  let username = req.query.username as string;
+  let password = req.query.password as string;
+  let rememberMe = req.query.rememberMe as string;
 
-    client.agent
-      .login(username, password, saveSession)
-      .then(() => {
-        let session = {
-          sessionId: client.agent.sessionId,
-          sessionExp: client.agent.sessionExpiration,
-        } as authedResponse;
+  const saveSession = rememberMe === "true" ? true : false;
 
-        //It gets saved to the file in /auth/session
-        if (saveSession) {
-          session.persistentId = client.agent.persistentId;
-          client.agent
-            .saveSession(sessionPath)
-            .then(() => {
-              console.log("session was saved to: " + sessionPath);
-              res.json(session);
-            })
-            .catch((err) => {
-              throw err;
-            });
-        }
-      })
-      .catch((err) => {
-        res.json({
-            err: err
-        });
+  client.agent
+    .login(username, password, saveSession)
+    .then(() => {
+      let session = {
+        sessionId: client.agent.sessionId,
+        sessionExp: client.agent.sessionExpiration,
+      } as authedResponse;
+
+      //It gets saved to the file in /auth/session
+      if (saveSession) {
+        session.persistentId = client.agent.persistentId;
+        client.agent
+          .saveSession(sessionPath)
+          .then(() => {
+            console.log("session was saved to: " + sessionPath);
+            res.json(session);
+          })
+          .catch((err) => {
+            throw err;
+          });
+      }
+    })
+    .catch((err) => {
+      res.json({
+        err: err.toString(),
       });
-  }
-);
+    });
+});
 
 router.get("/retrieveSession", (req: Request, res: Response) => {
+  console.log("calling retrieve session");
   client.agent
     .loginWithSession(sessionPath)
     .then(() => {
@@ -63,7 +63,7 @@ router.get("/retrieveSession", (req: Request, res: Response) => {
     })
     .catch((err) => {
       res.json({
-          err: err
+        err: err.toString(),
       });
     });
 });
@@ -77,7 +77,7 @@ router.get("/logout", (req: Request, res: Response) => {
     })
     .catch((err) => {
       console.log(err);
-      res.json(err);
+      res.json(err.toString());
     });
 });
 

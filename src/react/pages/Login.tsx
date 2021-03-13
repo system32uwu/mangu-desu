@@ -72,12 +72,17 @@ export default function Login() {
             noValidate
             onSubmit={(e) => {
               e.preventDefault();
-              loginWithMangaDex(username, password, rememberMe).then(
-                (session) => {
+              loginWithMangaDex(username, password, rememberMe)
+                .then((session) => {
                   console.log(JSON.stringify(session));
+                  if (rememberMe) {
+                    localStorage.setItem("username", username);
+                    localStorage.setItem("password", password);
+                    localStorage.setItem("session", JSON.stringify(session));
+                  }
                   //redirect to home page.
-                }
-              );
+                })
+                .catch((err) => console.error(err));
             }}
           >
             <TextField
@@ -127,7 +132,7 @@ export default function Login() {
             </Button>
           </form>
           <Button
-            style={{ textTransform: "none", color:"Highlight" }}
+            style={{ textTransform: "none", color: "Highlight" }}
             href="https://mangadex.org/signup"
             target="_"
           >

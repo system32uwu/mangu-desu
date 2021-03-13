@@ -1,9 +1,10 @@
-import express,{Router} from "express";
-import { router as mangu } from "./mangu"
-import { router as home } from "./home"
-import { router as auth } from "./auth"
-import { router as manga } from "./manga"
-import { router as chapters } from "./chapters"
+import { app } from "electron";
+import express, { Router } from "express";
+import { router as mangu } from "./mangu";
+import { router as home } from "./home";
+import { router as auth } from "./auth";
+import { router as manga } from "./manga";
+import { router as chapters } from "./chapters";
 import { Mangadex } from "mangadex-api";
 import path from "path";
 
@@ -15,9 +16,9 @@ router.use("/auth", auth);
 router.use("/manga", manga);
 router.use("/chapters", chapters);
 
-export {router};
+export { router };
 
 //every other endpoint will use this instance.
 export const client = new Mangadex();
 
-export const sessionPath = path.join(__dirname, "auth", "session");
+export const sessionPath = path.join(app.getAppPath(), "auth", "session");
