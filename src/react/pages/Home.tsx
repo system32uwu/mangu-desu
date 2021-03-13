@@ -1,6 +1,6 @@
 import * as React from "react";
 import axios from "axios";
-
+import { Link } from "@material-ui/core";
 //listado de mangas
 
 //filtrar por: newest, top6h, top24h,top7d,topFollows,topRating.
@@ -23,7 +23,11 @@ class Home extends React.Component<IProps, IState> {
   }
 
   render() {
-    return <div></div>;
+    return (
+      <div>
+        home
+      </div>
+    );
   }
 }
 
