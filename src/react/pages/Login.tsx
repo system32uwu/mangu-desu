@@ -80,9 +80,9 @@ export default function Login() {
                     localStorage.setItem("password", password);
                     localStorage.setItem("session", JSON.stringify(session));
                   }
-                  //redirect to home page.
+                  window.location.hash = "/home";
                 })
-                .catch((err) => console.error(err));
+                .catch((err) => console.error(err)); //TODO: show error to user.
             }}
           >
             <TextField
