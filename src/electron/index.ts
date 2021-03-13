@@ -1,5 +1,4 @@
 import { app, BrowserWindow } from "electron";
-require('@electron/remote/main').initialize();
 require("./server");
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
@@ -22,7 +21,6 @@ const createWindow = (): void => {
       enableRemoteModule: true,
       contextIsolation:false
     },
-    title: "Mangu Desu",
     titleBarStyle: "hidden",
     frame: false,
     autoHideMenuBar: true,

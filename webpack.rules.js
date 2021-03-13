@@ -5,12 +5,6 @@ module.exports = [
     use: "node-loader",
   },
   {
-    test: /\.(jpg|png)$/,
-    use: {
-      loader: "file-loader",
-    },
-  },
-  {
     test: /\.(js|jsx)$/,
     exclude: /node_modules/,
     use: {
