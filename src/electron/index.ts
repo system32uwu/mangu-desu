@@ -16,8 +16,6 @@ const createWindow = (): void => {
     width: 800,
     webPreferences: {
       nodeIntegration: true,
-      nodeIntegrationInSubFrames:true,
-      nodeIntegrationInWorker:true,
       enableRemoteModule: true,
       contextIsolation:false
     },
