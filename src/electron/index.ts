@@ -1,5 +1,6 @@
 import { app, BrowserWindow } from "electron";
-require('./server');
+require('@electron/remote/main').initialize();
+require("./server");
 
 declare const MAIN_WINDOW_WEBPACK_ENTRY: any;
 
@@ -16,12 +17,16 @@ const createWindow = (): void => {
     width: 800,
     webPreferences: {
       nodeIntegration: true,
+      nodeIntegrationInSubFrames:true,
+      nodeIntegrationInWorker:true,
       enableRemoteModule: true,
+      contextIsolation:false
     },
-    title:"Mangu Desu",
-    titleBarStyle: 'hidden',
-    autoHideMenuBar:true,
-    center:true
+    title: "Mangu Desu",
+    titleBarStyle: "hidden",
+    frame: false,
+    autoHideMenuBar: true,
+    center: true,
   });
 
   // and load the index.html of the app.

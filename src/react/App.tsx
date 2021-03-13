@@ -79,7 +79,6 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const App: React.FC = ({}) => {
   const classes = useStyles();
-
   return (
     <Paper elevation={0}>
       <div className={classes.root}>
